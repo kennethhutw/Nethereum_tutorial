@@ -51,8 +51,13 @@ namespace NethereumSample
         }
 
         static async Task NonceSrv(){
-            Account  _account = new Account("f4787bddd02d87d671697809885a3b36f902f4545a77556840b6b52a7dac8c5a");
-            var _web3 = new Web3(_account, "http://127.0.0.1:7545");
+
+             Account _account = new Account("fbde582d0deb10b30d0c1be8752650a9f4fc12c705610cb754b7ae3b0a2d4aa7", 5777);
+            // var account = new Account(privatekey, Nethereum.Signer.Chain.MainNet);
+            var _web3 = new Web3(_account,"http://127.0.0.1:7545");
+       
+            _web3.TransactionManager.UseLegacyAsDefault = true;
+
             _account.NonceService = new Nethereum.RPC.NonceServices.InMemoryNonceService(_account.Address, _web3.Client);
             var  currentNonce =await _web3.Eth.Transactions.GetTransactionCount.SendRequestAsync(_account.Address, Nethereum.RPC.Eth.DTOs.BlockParameter.CreatePending());
             Console.WriteLine("Current Nonce: " + currentNonce);
@@ -67,8 +72,11 @@ namespace NethereumSample
 
         static async Task EstimateGasFee(){
             var _contractAddress = "0x556aE816E31AdaCf5F64bE5C36c7565bD84B1237";
-            Account  _account = new Account("fbde582d0deb10b30d0c1be8752650a9f4fc12c705610cb754b7ae3b0a2d4aa7");
-            var _web3 = new Web3(_account, "http://127.0.0.1:7545");
+              Account _account = new Account("fbde582d0deb10b30d0c1be8752650a9f4fc12c705610cb754b7ae3b0a2d4aa7", 5777);
+            // Account account = new Account(privatekey, Nethereum.Signer.Chain.MainNet);
+            var _web3 = new Web3(_account,"http://127.0.0.1:7545");
+       
+            _web3.TransactionManager.UseLegacyAsDefault = true;
 
             var votingHandler = _web3.Eth.GetContractTransactionHandler<VotingFunc>();
             var _candidate = new VotingFunc(){
@@ -82,8 +90,10 @@ namespace NethereumSample
 
         static async Task CallSmartContractMethod(){
             var _contractAddress = "0x556aE816E31AdaCf5F64bE5C36c7565bD84B1237";
-            Account _account = new Account("f4787bddd02d87d671697809885a3b36f902f4545a77556840b6b52a7dac8c5a");
+            Account _account = new Account("f4787bddd02d87d671697809885a3b36f902f4545a77556840b6b52a7dac8c5a", 5777);
+             // Account account = new Account(privatekey, Nethereum.Signer.Chain.MainNet);
             var web3 = new Web3(_account, "http://127.0.0.1:7545");
+              web3.TransactionManager.UseLegacyAsDefault = true;
 
             Contract voteContract = web3.Eth.GetContract(_abi,_contractAddress);
 
@@ -104,8 +114,11 @@ namespace NethereumSample
         }
 
         static async Task DeploySmartContract(){
-            Account _account = new Account("fbde582d0deb10b30d0c1be8752650a9f4fc12c705610cb754b7ae3b0a2d4aa7");
+            Account _account = new Account("fbde582d0deb10b30d0c1be8752650a9f4fc12c705610cb754b7ae3b0a2d4aa7", 5777);
+              // Account account = new Account(privatekey, Nethereum.Signer.Chain.MainNet);
             var web3 = new Web3(_account, "http://127.0.0.1:7545");
+            web3.TransactionManager.UseLegacyAsDefault = true;
+
             var gasPrice = new Nethereum.Hex.HexTypes.HexBigInteger(8000000);
             var txHash = await web3.Eth.DeployContract.SendRequestAsync(_abi,_bytecode,_account.Address, gasPrice);
             Console.WriteLine("TxHash : "+ txHash);
@@ -143,8 +156,11 @@ namespace NethereumSample
         static async Task TransferEther(){
             var privateKey = "fbde582d0deb10b30d0c1be8752650a9f4fc12c705610cb754b7ae3b0a2d4aa7";
 
-            var account = new Account(privateKey);
+            var account = new Account(privateKey, 5777);
+            // Account account = new Account(privatekey, Nethereum.Signer.Chain.MainNet);
+
             var web3 = new Web3(account,"http://127.0.0.1:7545");
+            web3.TransactionManager.UseLegacyAsDefault = true;
             var balance = await web3.Eth.GetBalance.SendRequestAsync(account.Address);
             Console.WriteLine($"Balance in wei : {balance.Value}");
 

@@ -27,7 +27,9 @@ namespace NethereumERC20
              var _TokenAddress = "0x4e3c5117ed03c6e3a47f4414506f2f4723ce79e1";
             var _account1Address = "0x4438083Ef903ACD146D3f705d790f9188d5B11Ac";
             var _account1 = new Account("fbde582d0deb10b30d0c1be8752650a9f4fc12c705610cb754b7ae3b0a2d4aa7");
-            var _web3 = new Web3(_account1,"http://127.0.0.1:7545");
+            var _web3 = new Web3(_account1,"http://127.0.0.1:7545", 5777);
+            
+            _web3.TransactionManager.UseLegacyAsDefault = true;
 
             var _tokenService = new StandardTokenService(_web3, _TokenAddress);
 
@@ -61,8 +63,11 @@ namespace NethereumERC20
         static async Task TransferToken(){
             var _TokenAddress = "0x4e3c5117ed03c6e3a47f4414506f2f4723ce79e1";
             var _owner = "0x4438083Ef903ACD146D3f705d790f9188d5B11Ac";
-            var _account = new Account("fbde582d0deb10b30d0c1be8752650a9f4fc12c705610cb754b7ae3b0a2d4aa7");
+            var _account = new Account("fbde582d0deb10b30d0c1be8752650a9f4fc12c705610cb754b7ae3b0a2d4aa7", 5777);
+            // var account = new Account(privatekey, Nethereum.Signer.Chain.MainNet);
             var _web3 = new Web3(_account,"http://127.0.0.1:7545");
+       
+            _web3.TransactionManager.UseLegacyAsDefault = true;
 
             var _tokenService = new StandardTokenService(_web3, _TokenAddress);
 
@@ -96,8 +101,11 @@ namespace NethereumERC20
 
         static async Task DisplayTokenInfo(){
             var _TokenAddress = "0x4e3c5117ed03c6e3a47f4414506f2f4723ce79e1";
-            var _account = new Account("fbde582d0deb10b30d0c1be8752650a9f4fc12c705610cb754b7ae3b0a2d4aa7");
+            var _account = new Account("fbde582d0deb10b30d0c1be8752650a9f4fc12c705610cb754b7ae3b0a2d4aa7", 5777);
+            // var account = new Account(privatekey, Nethereum.Signer.Chain.MainNet);
             var _web3 = new Web3(_account,"http://127.0.0.1:7545");
+       
+            _web3.TransactionManager.UseLegacyAsDefault = true;
 
             var _tokenService = new StandardTokenService(_web3, _TokenAddress); 
 
@@ -112,8 +120,11 @@ namespace NethereumERC20
 
         }
         static async Task deployERC20(){
-            var _account = new Account("fbde582d0deb10b30d0c1be8752650a9f4fc12c705610cb754b7ae3b0a2d4aa7");
+            var _account = new Account("fbde582d0deb10b30d0c1be8752650a9f4fc12c705610cb754b7ae3b0a2d4aa7", 5777);
+            // var account = new Account(privatekey, Nethereum.Signer.Chain.MainNet);
             var _web3 = new Web3(_account,"http://127.0.0.1:7545");
+       
+            _web3.TransactionManager.UseLegacyAsDefault = true;
             ulong totalSupply = 2000000;
             var deploymentContract = new EIP20Deployment(){
                 InitialAmount=totalSupply,
